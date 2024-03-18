@@ -76,3 +76,5 @@ someElement.addEventListener('another', e => {
 
 someElement.dispatchEvent(anotherEvent)
 ```
+
+> Inspired by the blog: [A Quick Guide to Custom HTML Elements](https://dev.to/zippcodder/a-quick-guide-to-custom-html-elements-5f3b)

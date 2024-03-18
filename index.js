@@ -1,5 +1,9 @@
 class Typewriter extends HTMLElement {
-  cursor = '|'
+  cursor
+  shadow
+  textarea
+  keys
+
   constructor() {
     super()
     this.init()
@@ -16,7 +20,6 @@ class Typewriter extends HTMLElement {
   }
 
   initTextarea() {
-    this.textarea.innerText = '|'
     this.textarea.addEventListener('typed', e => {
       this.insert(e.detail.value)
     })
@@ -41,10 +44,27 @@ class Typewriter extends HTMLElement {
     if (this.textarea.value.length === 1) return
     this.textarea.value = this.textarea.value.slice(0, -2) + this.cursor
   }
+  intersectionHandler(entries, observer) {
+    console.log(entries)
+    if (!entries[0].isIntersecting) return
+    observer.unobserve(this)
+
+    fetch('./data.json')
+      .then(res => res.json())
+      .then(data => {
+        this.textarea.value = this.cursor = data.value
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
 
   connectedCallback() {
     this.initTextarea()
     this.generateKeyboard()
+    new IntersectionObserver(this.intersectionHandler.bind(this), {
+      margin: 0,
+    }).observe(this)
   }
 
   generateKeyboard() {
