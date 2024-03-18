@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Elements</title>
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <template id="typewriter-template">
+      <style>
+        textarea {
+          background: black;
+          color: limegreen;
+          width: 200px;
+          height: 70px;
+          box-sizing: border-box;
+          border: none;
+          padding: 0.5em;
+        }
+
+        div {
+          width: 200px;
+          display: grid;
+          height: 200px;
+          grid-template-columns: repeat(4, auto);
+        }
+
+        span {
+          height: 270px;
+          width: 200px;
+          display: grid;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+      </style>
+      <span>
+        <!-- screen -->
+        <textarea readonly placeholder="..."></textarea>
+        <!-- button container -->
+        <div></div>
+      </span>
+    </template>
+    <h1>Hello Custom Elements!</h1>
+    <type-writer></type-writer>
+  </body>
+</html>
